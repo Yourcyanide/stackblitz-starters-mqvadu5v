@@ -1,0 +1,135 @@
+<section class="page page-users">
+  <!-- заголовок | кнопка | поиск -->
+  <div class="toolbar three-cols">
+    <h1>Управление пользователями</h1>
+
+    <button class="btn primary create" (click)="openPanel()">
+      Создать пользователя
+    </button>
+
+    <label class="search">
+      <span class="icon">🔎</span>
+      <input type="text" placeholder="Поиск" />
+    </label>
+  </div>
+
+  <!-- Таблица -->
+  <div class="card table">
+    <table class="grid">
+      <thead>
+        <tr>
+          <th>ФИО</th>
+          <th>Роль</th>
+          <th>Телефон</th>
+          <th>Статус</th>
+          <th>Последний вход</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Фамилия И.О.</td>
+          <td><span class="role badge customer">Заказчик</span></td>
+          <td>449-110-13</td>
+          <td><span class="status ok">Активен</span></td>
+          <td>17 мая</td>
+        </tr>
+        <tr>
+          <td>Фамилия И.О.</td>
+          <td><span class="role badge foreman">Прораб</span></td>
+          <td>123-456-78</td>
+          <td><span class="status ok">Активен</span></td>
+          <td>25 августа</td>
+        </tr>
+        <tr>
+          <td>Фамилия И.О.</td>
+          <td><span class="role badge inspector">Инспектор</span></td>
+          <td>111-155-457</td>
+          <td><span class="status ok">Активен</span></td>
+          <td>1 декабря</td>
+        </tr>
+        <tr>
+          <td>Фамилия И.О.</td>
+          <td><span class="role badge admin">Админ</span></td>
+          <td>993-123-12</td>
+          <td><span class="status err">Заблокирован</span></td>
+          <td>23 января</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pager">
+      <span>1–4 из 4</span>
+      <span>1–4 из 4</span>
+    </div>
+  </div>
+
+  <!-- ПРАВАЯ САЙД-ПАНЕЛЬ -->
+  <aside class="card panel" *ngIf="panelOpen">
+    <div class="panel-header">
+      <h3>Создание пользователя</h3>
+      <button class="icon-btn" (click)="closePanel()" aria-label="Закрыть">
+        ×
+      </button>
+    </div>
+
+    <label class="field">
+      <span class="label">ФИО</span>
+      <input class="input" placeholder="Петров В.В." />
+    </label>
+
+    <div class="field radios">
+      <span class="label">Контакты</span>
+      <label class="radio-chip">
+        <input
+          type="radio"
+          name="c"
+          [checked]="contact==='phone'"
+          (change)="setContact('phone')"
+        />
+        <span>Телефон</span>
+      </label>
+      <label class="radio-chip">
+        <input
+          type="radio"
+          name="c"
+          [checked]="contact==='email'"
+          (change)="setContact('email')"
+        />
+        <span>Почта</span>
+      </label>
+    </div>
+
+    <ng-container *ngIf="contact==='phone'; else emailField">
+      <label class="field">
+        <span class="label">Телефон</span>
+        <input class="input" placeholder="+7 999 999 99 99" />
+      </label>
+    </ng-container>
+    <ng-template #emailField>
+      <label class="field">
+        <span class="label">Почта</span>
+        <input class="input" type="email" placeholder="user@example.com" />
+      </label>
+    </ng-template>
+
+    <label class="field select">
+      <span class="label">Роль</span>
+      <select class="input">
+        <option>Админ</option>
+        <option>Инспектор</option>
+        <option>Прораб</option>
+        <option>Заказчик</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="label">Пароль</span>
+      <input class="input" type="password" value="********" />
+    </label>
+
+    <button class="btn primary wide">Сохранить</button>
+    <button class="btn ghost" type="button" (click)="closePanel()">
+      Отмена
+    </button>
+  </aside>
+</section>
